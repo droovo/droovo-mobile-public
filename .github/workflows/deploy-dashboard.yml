@@ -1,0 +1,29 @@
+name: Deploy Dashboard to Firebase Hosting
+
+# Publishes dashboard/ (a static site: no build step) to the
+# droovo-flutter-public Firebase Hosting project whenever it changes on
+# main. Requires a one-time repo secret only a Firebase project owner can
+# create — see CONTRIBUTING.md / README.md "Dashboard" section for how.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'dashboard/**'
+      - 'firebase.json'
+      - '.firebaserc'
+      - '.github/workflows/deploy-dashboard.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Firebase Hosting (live channel)
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DROOVO_FLUTTER_PUBLIC }}'
+          projectId: droovo-flutter-public
+          channelId: live

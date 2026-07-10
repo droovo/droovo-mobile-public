@@ -4,6 +4,8 @@
 
 Welcome to the **public Droovo Flutter app repository**! This repo contains only a subset of the Flutter app: helper classes and testable code that external contributors can work on and improve.
 
+📊 **[Live project dashboard](https://droovo-flutter-public.web.app)** — branches, recent activity, pull requests, CI builds, and downloads at a glance.
+
 🌐 [droovo.tn](https://droovo.tn/) • 📱 [Get it on Google Play](https://play.google.com/store/apps/details?id=tn.droovo.droovo_app) • ✉️ [Contact us](https://droovo.tn/contact)
 
 > ⚠️ **Note:** Sensitive code and the full app are maintained in the private Droovo GitLab repository.
@@ -13,6 +15,7 @@ Welcome to the **public Droovo Flutter app repository**! This repo contains only
 ## Table of Contents
 
 * [Project Overview](#project-overview)
+* [Dashboard](#dashboard)
 * [Getting Started](#getting-started)
 * [Contributing](#contributing)
 * [CI/CD & Testing](#cicd--testing)
@@ -33,6 +36,24 @@ This is a real, runnable Flutter project — it has no product screens, only the
 * `test/`: one test file per helper, plus `test/fixtures/sample_data.json` — fake rides, cars, users and chat messages that every test exercises against, and `test/helpers/test_data.dart` which loads it into the typed models above.
 
 The full app, including sensitive business logic, payment, and backend integrations, is in the private GitLab repository.
+
+---
+
+## Dashboard
+
+**[droovo-flutter-public.web.app](https://droovo-flutter-public.web.app)** is a live, read-only project dashboard — a plain static site (`dashboard/`) that reads public data straight from the GitHub API and shows:
+
+* **Activity** — recent commits on `main`, so you can see what changed and who changed it.
+* **Pull Requests** — open and recently updated PRs from contributors.
+* **Branches** — every branch and its latest commit.
+* **Builds** — recent CI runs with pass/fail status, linking to each run on GitHub (downloading that run's artifact still requires a GitHub login — that's GitHub's own policy, not something this dashboard can bypass).
+* **Downloads** — tagged releases with the APK/AAB/web build attached, which download directly with **no GitHub login needed**.
+
+It's hosted on Firebase Hosting and redeploys automatically via
+[`.github/workflows/deploy-dashboard.yml`](.github/workflows/deploy-dashboard.yml)
+whenever `dashboard/` changes on `main`. It ships no backend and stores no
+data of its own — everything shown is fetched live from
+`api.github.com` in the visitor's browser.
 
 ---
 

@@ -11,10 +11,12 @@ secrets — so it's safe to fork, run, and send PRs against.
 * More realistic fake data in `test/fixtures/sample_data.json`.
 * Documentation (this file, the README, code comments).
 
-Please don't try to wire in Firebase, HTTP calls, or platform plugins —
-that's the point of this repo staying dependency-free. If a helper needs
-data it doesn't have, add a field to the plain models in `lib/models/`
-rather than reaching for the private app's real entities.
+Please don't try to wire Firebase, HTTP calls, or platform plugins into
+`lib/helpers/` — that's the point of the helper code staying
+dependency-free. If a helper needs data it doesn't have, add a field to
+the plain models in `lib/models/` rather than reaching for the private
+app's real entities. (`dashboard/` is a separate, static, read-only site —
+see below — and isn't held to this rule.)
 
 ## Branch naming
 
@@ -62,6 +64,17 @@ Every push and pull request runs
 A maintainer tagging a release (e.g. `v1.0.0`) additionally publishes a
 [GitHub Release](../../releases) with those same build files attached —
 you don't need to create a tag yourself as a contributor.
+
+## Project dashboard
+
+**[droovo-flutter-public.web.app](https://droovo-flutter-public.web.app)**
+is a live, read-only view of this repo — activity, open PRs, branches, CI
+build status, and release downloads — useful for checking whether your PR
+has been picked up or whether a build is green before asking. It's a
+static site under `dashboard/` that just calls the public GitHub API; it
+redeploys automatically on push to `main` via
+[`.github/workflows/deploy-dashboard.yml`](.github/workflows/deploy-dashboard.yml).
+You're welcome to improve it too (it's plain HTML/CSS/JS, no build step).
 
 ## Merging into the private app
 

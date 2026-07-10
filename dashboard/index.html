@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Droovo Public Helpers — Project Dashboard</title>
+  <meta name="description" content="Live monitoring dashboard for the droovo-mobile-public repository: branches, activity, pull requests, CI builds, and downloadable releases." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚗</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-emoji" aria-hidden="true">🚗</span>
+        <div>
+          <h1>Droovo Public Helpers</h1>
+          <p class="tagline">Project dashboard — branches, activity, builds &amp; downloads</p>
+        </div>
+      </div>
+      <nav class="header-links">
+        <a href="https://github.com/droovo/droovo-mobile-public" target="_blank" rel="noopener">Repo</a>
+        <a href="https://github.com/droovo/droovo-mobile-public/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contribute</a>
+        <a href="https://droovo.tn/" target="_blank" rel="noopener">droovo.tn</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="stats" id="stats" aria-label="Project overview">
+      <div class="stat-card" id="stat-build">
+        <span class="stat-label">Latest build</span>
+        <span class="stat-value skeleton">…</span>
+      </div>
+      <div class="stat-card" id="stat-branches">
+        <span class="stat-label">Branches</span>
+        <span class="stat-value skeleton">…</span>
+      </div>
+      <div class="stat-card" id="stat-pulls">
+        <span class="stat-label">Open pull requests</span>
+        <span class="stat-value skeleton">…</span>
+      </div>
+      <div class="stat-card" id="stat-release">
+        <span class="stat-label">Latest release</span>
+        <span class="stat-value skeleton">…</span>
+      </div>
+    </section>
+
+    <div id="error-banner" class="error-banner" hidden></div>
+
+    <nav class="tabs" role="tablist" aria-label="Dashboard sections">
+      <button class="tab active" data-tab="activity" role="tab" aria-selected="true">Activity</button>
+      <button class="tab" data-tab="pulls" role="tab" aria-selected="false">Pull Requests</button>
+      <button class="tab" data-tab="branches" role="tab" aria-selected="false">Branches</button>
+      <button class="tab" data-tab="builds" role="tab" aria-selected="false">Builds</button>
+      <button class="tab" data-tab="downloads" role="tab" aria-selected="false">Downloads</button>
+    </nav>
+
+    <section id="panel-activity" class="panel" role="tabpanel">
+      <p class="panel-hint">Recent commits on <code>main</code> — what changed, and who changed it.</p>
+      <ul class="list" id="list-activity"><li class="skeleton-row"></li></ul>
+    </section>
+
+    <section id="panel-pulls" class="panel" role="tabpanel" hidden>
+      <p class="panel-hint">Open and recently updated pull requests from contributors.</p>
+      <ul class="list" id="list-pulls"><li class="skeleton-row"></li></ul>
+    </section>
+
+    <section id="panel-branches" class="panel" role="tabpanel" hidden>
+      <p class="panel-hint">All branches in the repository and their latest commit.</p>
+      <ul class="list" id="list-branches"><li class="skeleton-row"></li></ul>
+    </section>
+
+    <section id="panel-builds" class="panel" role="tabpanel" hidden>
+      <p class="panel-hint">
+        Recent CI runs (analyze, test, build). Each run's APK/AAB/web build is attached as a
+        workflow artifact — open the run on GitHub and sign in to download it (GitHub's own
+        policy; see <a href="#panel-downloads" class="switch-tab" data-tab="downloads">Downloads</a>
+        for no-login-required builds).
+      </p>
+      <ul class="list" id="list-builds"><li class="skeleton-row"></li></ul>
+    </section>
+
+    <section id="panel-downloads" class="panel" role="tabpanel" hidden>
+      <p class="panel-hint">
+        Tagged releases with attached build files — these download directly, no GitHub login needed.
+      </p>
+      <ul class="list" id="list-downloads"><li class="skeleton-row"></li></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      Data pulled live from the GitHub API for
+      <a href="https://github.com/droovo/droovo-mobile-public" target="_blank" rel="noopener">droovo/droovo-mobile-public</a>.
+      This page contains no product screens and ships no user data anywhere — it only reads public repository metadata.
+    </p>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
