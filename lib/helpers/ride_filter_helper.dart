@@ -28,7 +28,8 @@ class RideFilterHelper {
   static List<Ride> sortByRemainingSeatsDescending(List<Ride> rides) {
     final sorted = List<Ride>.of(rides);
     sorted.sort(
-        (a, b) => b.remainingPassengers.compareTo(a.remainingPassengers));
+      (a, b) => b.remainingPassengers.compareTo(a.remainingPassengers),
+    );
     return sorted;
   }
 

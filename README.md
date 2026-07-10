@@ -1,5 +1,7 @@
 # Droovo Mobile App (Public)
 
+[![Flutter CI](https://github.com/droovo/droovo-mobile-public/actions/workflows/flutter-ci.yml/badge.svg)](https://github.com/droovo/droovo-mobile-public/actions/workflows/flutter-ci.yml)
+
 Welcome to the **public Droovo Flutter app repository**! This repo contains only a subset of the Flutter app: helper classes and testable code that external contributors can work on and improve.
 
 > ⚠️ **Note:** Sensitive code and the full app are maintained in the private Droovo GitLab repository.
@@ -12,6 +14,7 @@ Welcome to the **public Droovo Flutter app repository**! This repo contains only
 * [Getting Started](#getting-started)
 * [Contributing](#contributing)
 * [CI/CD & Testing](#cicd--testing)
+* [Downloads](#downloads)
 * [Workflow for Updates](#workflow-for-updates)
 * [Reporting Issues](#reporting-issues)
 * [License](#license)
@@ -64,31 +67,51 @@ This launches the app with the public helper code, allowing you to test changes 
 
 ## Contributing
 
-We welcome contributions! Please follow these guidelines:
+We welcome contributions! Full guidelines, the pre-PR checklist, and what
+you can/can't touch live in [CONTRIBUTING.md](CONTRIBUTING.md). Short version:
 
 1. **Fork the repository**.
 2. **Create a feature branch** for your changes:
 
 ```bash
-git checkout -b contrib/my-feature
+git checkout -b feat/my-feature
 ```
 
 3. **Modify or add helper classes** only. Do not attempt to access sensitive or private logic.
 4. **Run tests locally**:
 
 ```bash
+dart format .
+flutter analyze
 flutter test
 ```
 
-5. **Submit a pull request (PR)** to the `contrib/*` branch. GitHub Actions will automatically run tests.
+5. **Submit a pull request (PR)**. GitHub Actions will automatically analyze, test, and build it.
 
 ---
 
 ## CI/CD & Testing
 
-* All PRs trigger automated Flutter tests and code analysis.
-* Only helper classes and `main_public.dart` are tested.
-* Builds are optional for Android and iOS testing.
+Every push and pull request runs [`.github/workflows/flutter-ci.yml`](.github/workflows/flutter-ci.yml) on GitHub Actions:
+
+1. **Verify** — `dart format --set-exit-if-changed .` and `flutter analyze`.
+2. **Test** — `flutter test` (the full suite under `test/`).
+3. **Build** — release **APK**, **AAB** (Android App Bundle), and a **web** build, uploaded as downloadable artifacts on the workflow run's *Summary* page (kept for 30 days).
+
+Android release builds are signed with Flutter's default debug keystore (see `android/app/build.gradle.kts`) since this is a community demo app, not a Play Store release — no signing secrets are needed to build them.
+
+Pushing a tag like `v1.0.0` runs the same pipeline and additionally publishes a **GitHub Release** with the APK/AAB/web zip attached — see [Downloads](#downloads).
+
+---
+
+## Downloads
+
+There are two ways to grab a build without compiling it yourself:
+
+* **Latest tagged release** (recommended, permanent link, no GitHub login needed): see the [Releases page](../../releases) for the newest `app-release.apk`, `app-release.aab`, and `droovo-public-helpers-web.zip`.
+* **Any individual commit/PR build**: open the corresponding run under the [Actions tab](../../actions/workflows/flutter-ci.yml), scroll to *Artifacts*, and download the APK/AAB/web zip generated for that push (requires being signed in to GitHub; artifacts expire after 30 days).
+
+These builds only contain the screen-less demo app from `lib/main_public.dart` — there is no product UI to install here, they mainly exist to prove the pipeline (and the helpers) actually build and run.
 
 ---
 

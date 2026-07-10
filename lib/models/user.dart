@@ -18,13 +18,13 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-        uid: json['uid'] as String,
-        displayName: json['displayName'] as String? ?? '',
-        email: json['email'] as String? ?? '',
-        phone: json['phone'] as String? ?? '',
-        isDriver: json['isDriver'] as bool? ?? false,
-        cars: (json['cars'] as List<dynamic>? ?? [])
-            .map((c) => Car.fromJson(c as Map<String, dynamic>))
-            .toList(),
-      );
+    uid: json['uid'] as String,
+    displayName: json['displayName'] as String? ?? '',
+    email: json['email'] as String? ?? '',
+    phone: json['phone'] as String? ?? '',
+    isDriver: json['isDriver'] as bool? ?? false,
+    cars: (json['cars'] as List<dynamic>? ?? [])
+        .map((c) => Car.fromJson(c as Map<String, dynamic>))
+        .toList(),
+  );
 }

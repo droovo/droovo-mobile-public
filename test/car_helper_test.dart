@@ -44,7 +44,11 @@ void main() {
         airConditioner: true,
         status: CarStatus.available,
         seats: [
-          Seat(id: 1, reservedBy: 'user-driver-1', status: SeatStatus.lockedForDriver),
+          Seat(
+            id: 1,
+            reservedBy: 'user-driver-1',
+            status: SeatStatus.lockedForDriver,
+          ),
           Seat(id: 2, reservedBy: '', status: SeatStatus.available),
           Seat(id: 3, reservedBy: 'passenger-1', status: SeatStatus.reserved),
           Seat(id: 4, reservedBy: '', status: SeatStatus.available),
@@ -84,7 +88,11 @@ void main() {
         airConditioner: false,
         status: CarStatus.available,
         seats: [
-          Seat(id: 1, reservedBy: 'someone-else', status: SeatStatus.lockedForDriver),
+          Seat(
+            id: 1,
+            reservedBy: 'someone-else',
+            status: SeatStatus.lockedForDriver,
+          ),
           Seat(id: 2, reservedBy: '', status: SeatStatus.available),
           Seat(id: 3, reservedBy: '', status: SeatStatus.available),
           Seat(id: 4, reservedBy: '', status: SeatStatus.available),

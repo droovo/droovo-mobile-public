@@ -15,9 +15,9 @@ class TestData {
   static Map<String, dynamic>? _raw;
 
   static Map<String, dynamic> get _data {
-    return _raw ??= jsonDecode(
-      File('test/fixtures/sample_data.json').readAsStringSync(),
-    ) as Map<String, dynamic>;
+    return _raw ??=
+        jsonDecode(File('test/fixtures/sample_data.json').readAsStringSync())
+            as Map<String, dynamic>;
   }
 
   static List<Car> get cars => (_data['cars'] as List<dynamic>)

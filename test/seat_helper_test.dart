@@ -40,24 +40,24 @@ void main() {
 
     test('locks the correct seats for a 2-passenger ride', () {
       final seats = SeatHelper.generateSeats('driver-1', 2);
-      final lockedIds =
-          seats.where((s) => s.status == SeatStatus.locked).map((s) => s.id);
+      final lockedIds = seats
+          .where((s) => s.status == SeatStatus.locked)
+          .map((s) => s.id);
 
       // getLockedSeatIds(2) only locks seats 3 and 4 -- seat 5 stays
       // available even though it won't be offered for a 2-passenger ride.
       expect(lockedIds, equals([3, 4]));
       expect(
-        seats
-            .where((s) => s.status == SeatStatus.available)
-            .map((s) => s.id),
+        seats.where((s) => s.status == SeatStatus.available).map((s) => s.id),
         equals([2, 5]),
       );
     });
 
     test('falls back to the default lock count when passengerCount is 0', () {
       final seats = SeatHelper.generateSeats('driver-1', 0);
-      final lockedIds =
-          seats.where((s) => s.status == SeatStatus.locked).map((s) => s.id);
+      final lockedIds = seats
+          .where((s) => s.status == SeatStatus.locked)
+          .map((s) => s.id);
       expect(lockedIds, isEmpty); // default (4) locks nothing extra
     });
   });

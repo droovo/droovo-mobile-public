@@ -61,10 +61,18 @@ void main() {
     });
 
     test('falls back to "Anonymous" for null, empty or malformed input', () {
-      expect(AuthValidationHelper.extractNameFromEmail(null), equals('Anonymous'));
-      expect(AuthValidationHelper.extractNameFromEmail(''), equals('Anonymous'));
-      expect(AuthValidationHelper.extractNameFromEmail('no-at-sign'),
-          equals('Anonymous'));
+      expect(
+        AuthValidationHelper.extractNameFromEmail(null),
+        equals('Anonymous'),
+      );
+      expect(
+        AuthValidationHelper.extractNameFromEmail(''),
+        equals('Anonymous'),
+      );
+      expect(
+        AuthValidationHelper.extractNameFromEmail('no-at-sign'),
+        equals('Anonymous'),
+      );
     });
   });
 }

@@ -51,14 +51,11 @@ class CarHelper {
           .map((s) => s.id)
           .toSet();
 
-      final sortedSeatIds = seats
-          .map((s) => s.id)
-          .where((id) => id != 1)
-          .toList()
-        ..sort((a, b) => b.compareTo(a));
+      final sortedSeatIds =
+          seats.map((s) => s.id).where((id) => id != 1).toList()
+            ..sort((a, b) => b.compareTo(a));
 
-      final expectedLockedIds =
-          sortedSeatIds.take(expectedLockedSeats).toSet();
+      final expectedLockedIds = sortedSeatIds.take(expectedLockedSeats).toSet();
 
       if (lockedSeats.length == expectedLockedIds.length &&
           lockedSeats.containsAll(expectedLockedIds)) {

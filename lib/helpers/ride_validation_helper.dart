@@ -50,8 +50,10 @@ class RideValidationHelper {
 class RideConsistencyHelper {
   RideConsistencyHelper._();
 
-  static Map<String, dynamic> validateRideConsistency(Ride ride,
-      {DateTime? now}) {
+  static Map<String, dynamic> validateRideConsistency(
+    Ride ride, {
+    DateTime? now,
+  }) {
     final issues = <String>[];
 
     if (ride.passengers.length + ride.remainingPassengers !=

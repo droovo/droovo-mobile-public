@@ -59,23 +59,26 @@ void main() {
       expect(withBreakdown['acMultiplier'], equals(1.125));
     });
 
-    test('non-positive distance falls back to 1 km instead of dividing by zero', () {
-      final zero = PricingCalculator.calculatePrice(
-        distanceKm: 0,
-        passengerCount: 1,
-        fuelType: 'diesel',
-        hasAC: false,
-      );
-      final negative = PricingCalculator.calculatePrice(
-        distanceKm: -5,
-        passengerCount: 1,
-        fuelType: 'diesel',
-        hasAC: false,
-      );
+    test(
+      'non-positive distance falls back to 1 km instead of dividing by zero',
+      () {
+        final zero = PricingCalculator.calculatePrice(
+          distanceKm: 0,
+          passengerCount: 1,
+          fuelType: 'diesel',
+          hasAC: false,
+        );
+        final negative = PricingCalculator.calculatePrice(
+          distanceKm: -5,
+          passengerCount: 1,
+          fuelType: 'diesel',
+          hasAC: false,
+        );
 
-      expect(zero['baseCost'], equals(negative['baseCost']));
-      expect(zero['baseCost'], greaterThan(0));
-    });
+        expect(zero['baseCost'], equals(negative['baseCost']));
+        expect(zero['baseCost'], greaterThan(0));
+      },
+    );
 
     test('passenger count is clamped between 1 and 7', () {
       final tooFew = PricingCalculator.calculatePrice(
@@ -100,7 +103,10 @@ void main() {
     test('getFuelTypeLabel maps known and unknown fuel types', () {
       expect(PricingCalculator.getFuelTypeLabel('diesel'), equals('Diesel'));
       expect(PricingCalculator.getFuelTypeLabel('ESSENCE'), equals('Essence'));
-      expect(PricingCalculator.getFuelTypeLabel('electric'), equals('electric'));
+      expect(
+        PricingCalculator.getFuelTypeLabel('electric'),
+        equals('electric'),
+      );
     });
 
     test('getBreakdownText renders a human readable summary', () {

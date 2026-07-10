@@ -1,7 +1,1 @@
-enum SeatStatus {
-  available,
-  reserved,
-  selected,
-  locked,
-  lockedForDriver,
-}
+enum SeatStatus { available, reserved, selected, locked, lockedForDriver }

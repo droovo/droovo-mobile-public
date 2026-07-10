@@ -11,8 +11,10 @@ void main() {
     });
 
     test('truncates long messages and appends an ellipsis', () {
-      final result =
-          ChatHelper.truncateMessage('This message is definitely too long', limit: 10);
+      final result = ChatHelper.truncateMessage(
+        'This message is definitely too long',
+        limit: 10,
+      );
       expect(result, equals('This messa...'));
       expect(result.length, equals(13)); // 10 chars + '...'
     });

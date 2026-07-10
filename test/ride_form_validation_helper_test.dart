@@ -24,53 +24,77 @@ void main() {
 
     test('rejects a price above the configured maximum', () {
       expect(RideFormValidationHelper.validatePrice('26'), isFalse);
-      expect(RideFormValidationHelper.validatePrice('40', maxPrice: 50), isTrue);
-      expect(RideFormValidationHelper.validatePrice('60', maxPrice: 50), isFalse);
+      expect(
+        RideFormValidationHelper.validatePrice('40', maxPrice: 50),
+        isTrue,
+      );
+      expect(
+        RideFormValidationHelper.validatePrice('60', maxPrice: 50),
+        isFalse,
+      );
     });
   });
 
   group('RideFormValidationHelper.validateSeats', () {
     test('accepts a seat count within [minSeats, carPossibleSeats]', () {
       expect(
-        RideFormValidationHelper.validateSeats('2',
-            carPossibleSeats: 4, minSeats: 1),
+        RideFormValidationHelper.validateSeats(
+          '2',
+          carPossibleSeats: 4,
+          minSeats: 1,
+        ),
         isTrue,
       );
     });
 
     test('rejects a seat count above the car capacity', () {
       expect(
-        RideFormValidationHelper.validateSeats('5',
-            carPossibleSeats: 4, minSeats: 1),
+        RideFormValidationHelper.validateSeats(
+          '5',
+          carPossibleSeats: 4,
+          minSeats: 1,
+        ),
         isFalse,
       );
     });
 
     test('rejects a seat count below the minimum', () {
       expect(
-        RideFormValidationHelper.validateSeats('1',
-            carPossibleSeats: 4, minSeats: 2),
+        RideFormValidationHelper.validateSeats(
+          '1',
+          carPossibleSeats: 4,
+          minSeats: 2,
+        ),
         isFalse,
       );
     });
 
     test('rejects when there is no car selected', () {
       expect(
-        RideFormValidationHelper.validateSeats('2',
-            carPossibleSeats: null, minSeats: 1),
+        RideFormValidationHelper.validateSeats(
+          '2',
+          carPossibleSeats: null,
+          minSeats: 1,
+        ),
         isFalse,
       );
     });
 
     test('rejects non-numeric or empty input', () {
       expect(
-        RideFormValidationHelper.validateSeats('',
-            carPossibleSeats: 4, minSeats: 1),
+        RideFormValidationHelper.validateSeats(
+          '',
+          carPossibleSeats: 4,
+          minSeats: 1,
+        ),
         isFalse,
       );
       expect(
-        RideFormValidationHelper.validateSeats('two',
-            carPossibleSeats: 4, minSeats: 1),
+        RideFormValidationHelper.validateSeats(
+          'two',
+          carPossibleSeats: 4,
+          minSeats: 1,
+        ),
         isFalse,
       );
     });
@@ -80,7 +104,9 @@ void main() {
     test('is the gap between requested and remaining passengers', () {
       expect(
         RideFormValidationHelper.getMinimumSeats(
-            requestedPassengers: 3, remainingPassengers: 1),
+          requestedPassengers: 3,
+          remainingPassengers: 1,
+        ),
         equals(2),
       );
     });
@@ -88,7 +114,9 @@ void main() {
     test('never goes below zero', () {
       expect(
         RideFormValidationHelper.getMinimumSeats(
-            requestedPassengers: 1, remainingPassengers: 3),
+          requestedPassengers: 1,
+          remainingPassengers: 3,
+        ),
         equals(0),
       );
     });

@@ -19,7 +19,8 @@ class DistanceHelper {
     final lat1 = _toRadians(start.latitude);
     final lat2 = _toRadians(end.latitude);
 
-    final a = sin(dLat / 2) * sin(dLat / 2) +
+    final a =
+        sin(dLat / 2) * sin(dLat / 2) +
         sin(dLon / 2) * sin(dLon / 2) * cos(lat1) * cos(lat2);
     final c = 2 * atan2(sqrt(a), sqrt(1 - a));
 

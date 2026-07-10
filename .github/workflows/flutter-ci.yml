@@ -1,0 +1,132 @@
+name: Flutter CI
+
+# Verifies (analyze), tests, and builds this public helpers project.
+#
+# - Every push to main and every pull request: analyze + test + build,
+#   with the APK/AAB/web build uploaded as downloadable workflow artifacts
+#   (see the "Summary" page of the run, retained for 30 days).
+# - Pushing a tag like v1.2.0 additionally publishes a GitHub Release with
+#   those same files attached, giving a permanent public download link.
+on:
+  push:
+    branches: [main]
+    tags: ['v*.*.*']
+  pull_request:
+  workflow_dispatch:
+
+env:
+  FLUTTER_CHANNEL: stable
+
+jobs:
+  verify_and_test:
+    name: Analyze & Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test
+
+  build:
+    name: Build APK, AAB & Web
+    needs: verify_and_test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Release builds are signed with Flutter's default debug keystore
+      # (see android/app/build.gradle.kts) since this is a community demo
+      # app, not a Play Store release — no signing secrets required.
+      - name: Build APK (release)
+        run: flutter build apk --release
+
+      - name: Build App Bundle (release)
+        run: flutter build appbundle --release
+
+      - name: Build Web (release)
+        run: flutter build web --release
+
+      - name: Zip web build
+        run: |
+          cd build/web
+          zip -r ../../droovo-public-helpers-web.zip .
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: droovo-public-helpers-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 30
+
+      - name: Upload AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: droovo-public-helpers-aab
+          path: build/app/outputs/bundle/release/app-release.aab
+          retention-days: 30
+
+      - name: Upload Web build
+        uses: actions/upload-artifact@v4
+        with:
+          name: droovo-public-helpers-web
+          path: droovo-public-helpers-web.zip
+          retention-days: 30
+
+  release:
+    name: Publish GitHub Release
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: droovo-public-helpers-apk
+          path: dist
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: droovo-public-helpers-aab
+          path: dist
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: droovo-public-helpers-web
+          path: dist
+
+      - name: Create release with attached build files
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            dist/app-release.apk
+            dist/app-release.aab
+            dist/droovo-public-helpers-web.zip

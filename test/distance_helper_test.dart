@@ -6,7 +6,10 @@ void main() {
   group('DistanceHelper', () {
     test('distance between identical points is zero', () {
       const point = LatLng(36.8065, 10.1815);
-      expect(DistanceHelper.calculateDistanceKm(point, point), closeTo(0, 0.0001));
+      expect(
+        DistanceHelper.calculateDistanceKm(point, point),
+        closeTo(0, 0.0001),
+      );
     });
 
     test('Tunis to Sfax is roughly 235km', () {
@@ -43,8 +46,11 @@ void main() {
     });
 
     test('getTruncatedStates truncates both fields to the limit', () {
-      final result =
-          DistanceHelper.getTruncatedStates('Ben Arous', 'Manouba', 5);
+      final result = DistanceHelper.getTruncatedStates(
+        'Ben Arous',
+        'Manouba',
+        5,
+      );
       expect(result['pickup'], equals('Ben A'));
       expect(result['destination'], equals('Manou'));
     });

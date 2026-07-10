@@ -12,11 +12,11 @@ class Message {
   });
 
   factory Message.fromJson(Map<String, dynamic> json) => Message(
-        uid: json['uid'] as String,
-        senderId: json['senderId'] as String,
-        message: json['message'] as String,
-        time: DateTime.parse(json['time'] as String),
-      );
+    uid: json['uid'] as String,
+    senderId: json['senderId'] as String,
+    message: json['message'] as String,
+    time: DateTime.parse(json['time'] as String),
+  );
 }
 
 class Group {
@@ -24,17 +24,13 @@ class Group {
   final String name;
   final List<Message> chats;
 
-  const Group({
-    required this.id,
-    required this.name,
-    this.chats = const [],
-  });
+  const Group({required this.id, required this.name, this.chats = const []});
 
   factory Group.fromJson(Map<String, dynamic> json) => Group(
-        id: json['id'] as String,
-        name: json['name'] as String,
-        chats: (json['chats'] as List<dynamic>? ?? [])
-            .map((m) => Message.fromJson(m as Map<String, dynamic>))
-            .toList(),
-      );
+    id: json['id'] as String,
+    name: json['name'] as String,
+    chats: (json['chats'] as List<dynamic>? ?? [])
+        .map((m) => Message.fromJson(m as Map<String, dynamic>))
+        .toList(),
+  );
 }

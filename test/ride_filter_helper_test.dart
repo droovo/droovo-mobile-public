@@ -17,30 +17,44 @@ void main() {
           'ride-006-invalid-negative-seats',
         ]),
       );
-      expect(available.map((r) => r.uid), isNot(contains('ride-003-collecting-locked')));
+      expect(
+        available.map((r) => r.uid),
+        isNot(contains('ride-003-collecting-locked')),
+      );
       expect(available.map((r) => r.uid), isNot(contains('ride-005-past')));
     });
 
     test('internalRides excludes externally imported rides', () {
       final internal = RideFilterHelper.internalRides(TestData.rides);
-      expect(internal.map((r) => r.uid), isNot(contains('ride-004-external-facebook')));
+      expect(
+        internal.map((r) => r.uid),
+        isNot(contains('ride-004-external-facebook')),
+      );
       expect(internal, hasLength(TestData.rides.length - 1));
     });
 
-    test('ridesWithAvailableSeats keeps only rides with remainingPassengers > 0', () {
-      final withSeats = RideFilterHelper.ridesWithAvailableSeats(TestData.rides);
-      expect(
-        withSeats.map((r) => r.uid),
-        containsAll([
-          'ride-001-pending-open',
-          'ride-003-collecting-locked',
-          'ride-004-external-facebook',
-          'ride-005-past',
-        ]),
-      );
-      expect(withSeats.map((r) => r.uid), isNot(contains('ride-002-full')));
-      expect(withSeats.map((r) => r.uid), isNot(contains('ride-006-invalid-negative-seats')));
-    });
+    test(
+      'ridesWithAvailableSeats keeps only rides with remainingPassengers > 0',
+      () {
+        final withSeats = RideFilterHelper.ridesWithAvailableSeats(
+          TestData.rides,
+        );
+        expect(
+          withSeats.map((r) => r.uid),
+          containsAll([
+            'ride-001-pending-open',
+            'ride-003-collecting-locked',
+            'ride-004-external-facebook',
+            'ride-005-past',
+          ]),
+        );
+        expect(withSeats.map((r) => r.uid), isNot(contains('ride-002-full')));
+        expect(
+          withSeats.map((r) => r.uid),
+          isNot(contains('ride-006-invalid-negative-seats')),
+        );
+      },
+    );
 
     test('bookableRides applies every booking rule at once', () {
       final bookable = RideFilterHelper.bookableRides(TestData.rides);
@@ -56,43 +70,65 @@ void main() {
       }
     });
 
-    test('sortByRemainingSeatsDescending orders the fullest seat count first', () {
-      final sorted =
-          RideFilterHelper.sortByRemainingSeatsDescending(TestData.rides);
-      for (var i = 0; i < sorted.length - 1; i++) {
-        expect(sorted[i].remainingPassengers,
-            greaterThanOrEqualTo(sorted[i + 1].remainingPassengers));
-      }
-      expect(sorted.last.uid, equals('ride-006-invalid-negative-seats')); // -1
-    });
+    test(
+      'sortByRemainingSeatsDescending orders the fullest seat count first',
+      () {
+        final sorted = RideFilterHelper.sortByRemainingSeatsDescending(
+          TestData.rides,
+        );
+        for (var i = 0; i < sorted.length - 1; i++) {
+          expect(
+            sorted[i].remainingPassengers,
+            greaterThanOrEqualTo(sorted[i + 1].remainingPassengers),
+          );
+        }
+        expect(
+          sorted.last.uid,
+          equals('ride-006-invalid-negative-seats'),
+        ); // -1
+      },
+    );
 
     test('groupByDestination buckets rides sharing the same destination', () {
-      final rideA = TestData.rideByUid('ride-001-pending-open')
-          .copyWith(destination: 'City A');
-      final rideB = TestData.rideByUid('ride-002-full')
-          .copyWith(destination: 'City B');
-      final rideC = TestData.rideByUid('ride-003-collecting-locked')
-          .copyWith(destination: 'City A');
+      final rideA = TestData.rideByUid(
+        'ride-001-pending-open',
+      ).copyWith(destination: 'City A');
+      final rideB = TestData.rideByUid(
+        'ride-002-full',
+      ).copyWith(destination: 'City B');
+      final rideC = TestData.rideByUid(
+        'ride-003-collecting-locked',
+      ).copyWith(destination: 'City A');
 
-      final grouped = RideFilterHelper.groupByDestination([rideA, rideB, rideC]);
+      final grouped = RideFilterHelper.groupByDestination([
+        rideA,
+        rideB,
+        rideC,
+      ]);
 
       expect(grouped.keys, containsAll(['City A', 'City B']));
       expect(grouped['City A'], hasLength(2));
       expect(grouped['City B'], hasLength(1));
     });
 
-    test('findCheapestBookableRide picks the lowest price among bookable rides', () {
-      final cheaperRide = TestData.rideByUid('ride-002-full').copyWith(
-        uid: 'ride-002-reopened',
-        remainingPassengers: 2,
-        rideStatus: RideStatus.pending,
-        price: 5.0,
-      );
-      final rides = [TestData.rideByUid('ride-001-pending-open'), cheaperRide];
+    test(
+      'findCheapestBookableRide picks the lowest price among bookable rides',
+      () {
+        final cheaperRide = TestData.rideByUid('ride-002-full').copyWith(
+          uid: 'ride-002-reopened',
+          remainingPassengers: 2,
+          rideStatus: RideStatus.pending,
+          price: 5.0,
+        );
+        final rides = [
+          TestData.rideByUid('ride-001-pending-open'),
+          cheaperRide,
+        ];
 
-      final cheapest = RideFilterHelper.findCheapestBookableRide(rides);
-      expect(cheapest?.uid, equals('ride-002-reopened'));
-    });
+        final cheapest = RideFilterHelper.findCheapestBookableRide(rides);
+        expect(cheapest?.uid, equals('ride-002-reopened'));
+      },
+    );
 
     test('findCheapestBookableRide returns null when nothing is bookable', () {
       final noneBookable = [

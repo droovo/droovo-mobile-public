@@ -7,9 +7,9 @@ class LatLng {
   const LatLng(this.latitude, this.longitude);
 
   factory LatLng.fromJson(Map<String, dynamic> json) => LatLng(
-        (json['latitude'] as num).toDouble(),
-        (json['longitude'] as num).toDouble(),
-      );
+    (json['latitude'] as num).toDouble(),
+    (json['longitude'] as num).toDouble(),
+  );
 
   @override
   bool operator ==(Object other) =>

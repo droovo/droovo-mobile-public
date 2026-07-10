@@ -6,8 +6,9 @@ class AuthValidationHelper {
   static final RegExp _passwordMinLengthRegex = RegExp(r'.{6,}');
   static final RegExp _passwordUppercaseRegex = RegExp(r'[A-Z]');
   static final RegExp _passwordDigitRegex = RegExp(r'[0-9]');
-  static final RegExp _passwordSpecialCharRegex =
-      RegExp(r'[!@#\$%^&*(),.?":{}|<>_\-=+~`]');
+  static final RegExp _passwordSpecialCharRegex = RegExp(
+    r'[!@#\$%^&*(),.?":{}|<>_\-=+~`]',
+  );
 
   static final RegExp _emailRegex = RegExp(
     r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@'

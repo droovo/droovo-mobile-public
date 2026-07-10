@@ -52,29 +52,31 @@ class Ride {
   bool get isExternal => source != 'app';
 
   factory Ride.fromJson(Map<String, dynamic> json) => Ride(
-        uid: json['uid'] as String,
-        pickUp: json['pickUp'] as String,
-        destination: json['destination'] as String,
-        pickupState: json['pickupState'] as String? ?? '',
-        destinationState: json['destinationState'] as String? ?? '',
-        phone: json['phone'] as String? ?? '',
-        price: (json['price'] as num).toDouble(),
-        remainingPassengers: json['remainingPassengers'] as int,
-        requestedPassengers: json['requestedPassengers'] as int,
-        baggageCapacity: json['baggageCapacity'] as int? ?? 0,
-        rideTime: DateTime.parse(json['rideTime'] as String),
-        rideStatus: RideStatus.values.byName(json['rideStatus'] as String),
-        source: json['source'] as String? ?? 'app',
-        car: Car.fromJson(json['car'] as Map<String, dynamic>),
-        driver: User.fromJson(json['driver'] as Map<String, dynamic>),
-        passengers: (json['passengers'] as List<dynamic>? ?? [])
-            .map((p) => User.fromJson(p as Map<String, dynamic>))
-            .toList(),
-        pickupGeoPoint:
-            LatLng.fromJson(json['pickupGeoPoint'] as Map<String, dynamic>),
-        destinationGeoPoint: LatLng.fromJson(
-            json['destinationGeoPoint'] as Map<String, dynamic>),
-      );
+    uid: json['uid'] as String,
+    pickUp: json['pickUp'] as String,
+    destination: json['destination'] as String,
+    pickupState: json['pickupState'] as String? ?? '',
+    destinationState: json['destinationState'] as String? ?? '',
+    phone: json['phone'] as String? ?? '',
+    price: (json['price'] as num).toDouble(),
+    remainingPassengers: json['remainingPassengers'] as int,
+    requestedPassengers: json['requestedPassengers'] as int,
+    baggageCapacity: json['baggageCapacity'] as int? ?? 0,
+    rideTime: DateTime.parse(json['rideTime'] as String),
+    rideStatus: RideStatus.values.byName(json['rideStatus'] as String),
+    source: json['source'] as String? ?? 'app',
+    car: Car.fromJson(json['car'] as Map<String, dynamic>),
+    driver: User.fromJson(json['driver'] as Map<String, dynamic>),
+    passengers: (json['passengers'] as List<dynamic>? ?? [])
+        .map((p) => User.fromJson(p as Map<String, dynamic>))
+        .toList(),
+    pickupGeoPoint: LatLng.fromJson(
+      json['pickupGeoPoint'] as Map<String, dynamic>,
+    ),
+    destinationGeoPoint: LatLng.fromJson(
+      json['destinationGeoPoint'] as Map<String, dynamic>,
+    ),
+  );
 
   Ride copyWith({
     String? uid,

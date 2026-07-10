@@ -38,7 +38,10 @@ class SeatHelper {
       final id = i + 1;
       if (id == 1) {
         return Seat(
-            id: id, reservedBy: userId, status: SeatStatus.lockedForDriver);
+          id: id,
+          reservedBy: userId,
+          status: SeatStatus.lockedForDriver,
+        );
       } else if (lockedIds.contains(id)) {
         return Seat(id: id, reservedBy: '', status: SeatStatus.locked);
       } else {
@@ -63,8 +66,7 @@ class SeatHelper {
         status: seat.id == 1 ? SeatStatus.lockedForDriver : seat.status,
         reservedBy: seat.reservedBy,
       );
-    }).toList()
-      ..sort((a, b) => a.id.compareTo(b.id));
+    }).toList()..sort((a, b) => a.id.compareTo(b.id));
   }
 
   /// Converts a seat count that includes the driver into the
@@ -74,10 +76,10 @@ class SeatHelper {
   }
 
   static bool hasAvailableSeats(List<Seat> seats) => seats.any(
-        (seat) =>
-            seat.status == SeatStatus.available ||
-            seat.status == SeatStatus.selected,
-      );
+    (seat) =>
+        seat.status == SeatStatus.available ||
+        seat.status == SeatStatus.selected,
+  );
 
   static List<Seat> getAvailableSeats(List<Seat> seats) =>
       seats.where((seat) => seat.status == SeatStatus.available).toList();

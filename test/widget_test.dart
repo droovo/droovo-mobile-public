@@ -7,8 +7,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:droovo_mobile_public/main_public.dart';
 
 void main() {
-  testWidgets('DroovoPublicHelpersApp boots and shows sample helper output',
-      (WidgetTester tester) async {
+  testWidgets('DroovoPublicHelpersApp boots and shows sample helper output', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(const DroovoPublicHelpersApp());
 
     expect(find.textContaining('no product screens'), findsOneWidget);

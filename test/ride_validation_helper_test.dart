@@ -22,14 +22,16 @@ void main() {
     });
 
     test('remaining passengers cannot exceed the car capacity', () {
-      final ride = TestData.rideByUid('ride-001-pending-open')
-          .copyWith(remainingPassengers: 99);
+      final ride = TestData.rideByUid(
+        'ride-001-pending-open',
+      ).copyWith(remainingPassengers: 99);
       expect(RideValidationHelper.validatePassengerSeats(ride), isFalse);
     });
 
     test('seat arithmetic mismatch is detected', () {
-      final ride = TestData.rideByUid('ride-001-pending-open')
-          .copyWith(remainingPassengers: 1); // passengers(0) + 1 != 4 seats
+      final ride = TestData.rideByUid(
+        'ride-001-pending-open',
+      ).copyWith(remainingPassengers: 1); // passengers(0) + 1 != 4 seats
       expect(RideValidationHelper.validatePassengerSeats(ride), isFalse);
     });
   });
@@ -79,14 +81,18 @@ void main() {
   group('RideValidationHelper.isPriceValid / isRideComplete', () {
     test('every fixture ride has a strictly positive price', () {
       for (final ride in TestData.rides) {
-        expect(RideValidationHelper.isPriceValid(ride), isTrue,
-            reason: '${ride.uid} should have a valid price');
+        expect(
+          RideValidationHelper.isPriceValid(ride),
+          isTrue,
+          reason: '${ride.uid} should have a valid price',
+        );
       }
     });
 
     test('a price of zero is invalid', () {
-      final ride = TestData.rideByUid('ride-001-pending-open')
-          .copyWith(price: 0);
+      final ride = TestData.rideByUid(
+        'ride-001-pending-open',
+      ).copyWith(price: 0);
       expect(RideValidationHelper.isPriceValid(ride), isFalse);
     });
 
@@ -113,27 +119,36 @@ void main() {
     test('a well-formed ride reports zero issues', () {
       final ride = TestData.rideByUid('ride-002-full');
       final now = DateTime.utc(2026, 1, 1);
-      final report =
-          RideConsistencyHelper.validateRideConsistency(ride, now: now);
+      final report = RideConsistencyHelper.validateRideConsistency(
+        ride,
+        now: now,
+      );
 
       expect(report['isConsistent'], isTrue);
       expect(report['issues'], isEmpty);
       expect(report['issueCount'], equals(0));
     });
 
-    test('detects broken seat arithmetic, a past date and an invalid price', () {
-      final ride = TestData.rideByUid('ride-006-invalid-negative-seats')
-          .copyWith(price: 0, rideTime: DateTime.utc(2020, 1, 1));
-      final report = RideConsistencyHelper.validateRideConsistency(
-        ride,
-        now: DateTime.utc(2026, 1, 1),
-      );
+    test(
+      'detects broken seat arithmetic, a past date and an invalid price',
+      () {
+        final ride = TestData.rideByUid(
+          'ride-006-invalid-negative-seats',
+        ).copyWith(price: 0, rideTime: DateTime.utc(2020, 1, 1));
+        final report = RideConsistencyHelper.validateRideConsistency(
+          ride,
+          now: DateTime.utc(2026, 1, 1),
+        );
 
-      expect(report['isConsistent'], isFalse);
-      expect(report['issueCount'], greaterThanOrEqualTo(3));
-      expect(report['issues'], contains(contains('Seat arithmetic error')));
-      expect(report['issues'], contains(contains('Ride time is in the past')));
-      expect(report['issues'], contains(contains('Invalid price')));
-    });
+        expect(report['isConsistent'], isFalse);
+        expect(report['issueCount'], greaterThanOrEqualTo(3));
+        expect(report['issues'], contains(contains('Seat arithmetic error')));
+        expect(
+          report['issues'],
+          contains(contains('Ride time is in the past')),
+        );
+        expect(report['issues'], contains(contains('Invalid price')));
+      },
+    );
   });
 }

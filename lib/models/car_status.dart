@@ -1,6 +1,1 @@
-enum CarStatus {
-  available,
-  reserved,
-  selected,
-  locked,
-}
+enum CarStatus { available, reserved, selected, locked }
