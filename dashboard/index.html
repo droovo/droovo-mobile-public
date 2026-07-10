@@ -50,6 +50,7 @@
 
     <nav class="tabs" role="tablist" aria-label="Dashboard sections">
       <button class="tab active" data-tab="activity" role="tab" aria-selected="true">Activity</button>
+      <button class="tab" data-tab="contributors" role="tab" aria-selected="false">Top Contributors</button>
       <button class="tab" data-tab="pulls" role="tab" aria-selected="false">Pull Requests</button>
       <button class="tab" data-tab="branches" role="tab" aria-selected="false">Branches</button>
       <button class="tab" data-tab="builds" role="tab" aria-selected="false">Builds</button>
@@ -59,6 +60,11 @@
     <section id="panel-activity" class="panel" role="tabpanel">
       <p class="panel-hint">Recent commits on <code>main</code> — what changed, and who changed it.</p>
       <ul class="list" id="list-activity"><li class="skeleton-row"></li></ul>
+    </section>
+
+    <section id="panel-contributors" class="panel" role="tabpanel" hidden>
+      <p class="panel-hint">Ranked by commits to this repository. Click a name to open their GitHub profile.</p>
+      <ul class="list" id="list-contributors"><li class="skeleton-row"></li></ul>
     </section>
 
     <section id="panel-pulls" class="panel" role="tabpanel" hidden>

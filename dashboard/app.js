@@ -93,6 +93,7 @@ function initTabs() {
   const tabs = document.querySelectorAll(".tab");
   const panels = {
     activity: document.getElementById("panel-activity"),
+    contributors: document.getElementById("panel-contributors"),
     pulls: document.getElementById("panel-pulls"),
     branches: document.getElementById("panel-branches"),
     builds: document.getElementById("panel-builds"),
@@ -146,6 +147,29 @@ async function loadActivity() {
         </li>`;
       })
       .join("") || `<li class="empty-state">No commits found.</li>`
+  );
+}
+
+async function loadContributors() {
+  const contributors = await cachedFetch(`${API}/contributors?per_page=20`);
+  const medals = ["🥇", "🥈", "🥉"];
+
+  setListHtml(
+    "list-contributors",
+    contributors
+      .map((c, i) => {
+        const rank = medals[i] || `#${i + 1}`;
+        return `<li class="list-item">
+          <span class="rank">${rank}</span>
+          <img class="avatar" src="${c.avatar_url}&s=56" alt="" />
+          <div class="item-main">
+            <div class="item-title"><a href="${c.html_url}" target="_blank" rel="noopener">${escapeHtml(c.login)}</a></div>
+          </div>
+          <span class="badge badge-neutral">${c.contributions} commit${c.contributions === 1 ? "" : "s"}</span>
+        </li>`;
+      })
+      .join("") ||
+      `<li class="empty-state">No contributors yet — be the first! See <a href="https://github.com/${REPO}/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">CONTRIBUTING.md</a>.</li>`
   );
 }
 
@@ -310,6 +334,7 @@ async function main() {
 
   const loaders = [
     ["Activity", loadActivity],
+    ["Contributors", loadContributors],
     ["Pull requests", loadPulls],
     ["Branches", loadBranches],
     ["Builds", loadBuilds],

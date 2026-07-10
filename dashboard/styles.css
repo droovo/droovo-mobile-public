@@ -225,6 +225,15 @@ main {
   flex-shrink: 0;
 }
 
+.rank {
+  flex-shrink: 0;
+  width: 28px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
 .list-item .item-main {
   flex: 1;
   min-width: 0;
