@@ -20,11 +20,12 @@ Welcome to the **public Droovo Flutter app repository**! This repo contains only
 
 ## Project Overview
 
-This public repository contains:
+This is a real, runnable Flutter project — it has no product screens, only the pure business-logic helpers and their tests. It contains:
 
-* `helpers/` directory: utility classes and shared code safe for public contribution.
-* `main_public.dart`: a lightweight, testable app entry point for contributors.
-* Unit tests for helper classes.
+* `lib/helpers/`: pure-logic helper classes ported from the private app (pricing, distance/geolocation math, seat assignment, ride validation & filtering, form validation, auth rules, chat utilities). None of them touch Firebase, HTTP, or platform plugins, so they run anywhere `flutter test` runs.
+* `lib/models/`: plain Dart data classes (`Ride`, `Car`, `Seat`, `User`, `Message`...) that mirror the shape of the private app's entities without any of the Firestore/Hive wiring.
+* `lib/main_public.dart`: a screen-less demo entry point that just proves the helpers run as a real Flutter app — see [Getting Started](#getting-started).
+* `test/`: one test file per helper, plus `test/fixtures/sample_data.json` — fake rides, cars, users and chat messages that every test exercises against, and `test/helpers/test_data.dart` which loads it into the typed models above.
 
 The full app, including sensitive business logic, payment, and backend integrations, is in the private GitLab repository.
 

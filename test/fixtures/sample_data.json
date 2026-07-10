@@ -1,0 +1,394 @@
+{
+  "cars": [
+    {
+      "uid": "car-001",
+      "brand": "Toyota",
+      "model": "Corolla",
+      "color": "White",
+      "carNo": "123-TN-4567",
+      "possibleSeats": 4,
+      "airConditioner": true,
+      "status": "available",
+      "seats": [
+        { "id": 1, "reservedBy": "user-driver-1", "status": "lockedForDriver" },
+        { "id": 2, "reservedBy": "", "status": "available" },
+        { "id": 3, "reservedBy": "", "status": "available" },
+        { "id": 4, "reservedBy": "", "status": "available" },
+        { "id": 5, "reservedBy": "", "status": "locked" }
+      ]
+    },
+    {
+      "uid": "car-002",
+      "brand": "Peugeot",
+      "model": "208",
+      "color": "Black",
+      "carNo": "987-TN-6543",
+      "possibleSeats": 3,
+      "airConditioner": false,
+      "status": "available",
+      "seats": [
+        { "id": 1, "reservedBy": "user-driver-2", "status": "lockedForDriver" },
+        { "id": 2, "reservedBy": "user-passenger-1", "status": "reserved" },
+        { "id": 3, "reservedBy": "", "status": "available" },
+        { "id": 4, "reservedBy": "", "status": "locked" },
+        { "id": 5, "reservedBy": "", "status": "locked" }
+      ]
+    },
+    {
+      "uid": "car-003",
+      "brand": "Renault",
+      "model": "Clio",
+      "color": "Yellow",
+      "carNo": "555-TN-1212",
+      "possibleSeats": 4,
+      "airConditioner": true,
+      "status": "reserved",
+      "seats": [
+        { "id": 1, "reservedBy": "user-driver-3", "status": "lockedForDriver" },
+        { "id": 2, "reservedBy": "user-passenger-2", "status": "reserved" },
+        { "id": 3, "reservedBy": "user-passenger-3", "status": "reserved" },
+        { "id": 4, "reservedBy": "user-passenger-4", "status": "reserved" },
+        { "id": 5, "reservedBy": "", "status": "locked" }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "uid": "user-driver-1",
+      "displayName": "Amine Driver",
+      "email": "amine.driver@example.com",
+      "phone": "+21620000001",
+      "isDriver": true,
+      "cars": []
+    },
+    {
+      "uid": "user-driver-2",
+      "displayName": "Sarra Driver",
+      "email": "sarra.driver@example.com",
+      "phone": "+21620000002",
+      "isDriver": true,
+      "cars": []
+    },
+    {
+      "uid": "user-passenger-1",
+      "displayName": "Youssef Passenger",
+      "email": "youssef.passenger@example.com",
+      "phone": "+21620000003",
+      "isDriver": false,
+      "cars": []
+    },
+    {
+      "uid": "user-passenger-2",
+      "displayName": "Nour Passenger",
+      "email": "nour.passenger@example.com",
+      "phone": "+21620000004",
+      "isDriver": false,
+      "cars": []
+    }
+  ],
+  "rides": [
+    {
+      "uid": "ride-001-pending-open",
+      "pickUp": "Tunis, Avenue Habib Bourguiba",
+      "destination": "Sfax, Route de Gabes",
+      "pickupState": "Tunis",
+      "destinationState": "Sfax",
+      "phone": "+21620000001",
+      "price": 20.0,
+      "remainingPassengers": 4,
+      "requestedPassengers": 0,
+      "baggageCapacity": 2,
+      "rideTime": "2030-01-15T08:00:00.000Z",
+      "rideStatus": "pending",
+      "source": "app",
+      "car": {
+        "uid": "car-001",
+        "brand": "Toyota",
+        "model": "Corolla",
+        "color": "White",
+        "carNo": "123-TN-4567",
+        "possibleSeats": 4,
+        "airConditioner": true,
+        "status": "available",
+        "seats": []
+      },
+      "driver": {
+        "uid": "user-driver-1",
+        "displayName": "Amine Driver",
+        "email": "amine.driver@example.com",
+        "phone": "+21620000001",
+        "isDriver": true,
+        "cars": []
+      },
+      "passengers": [],
+      "pickupGeoPoint": { "latitude": 36.8065, "longitude": 10.1815 },
+      "destinationGeoPoint": { "latitude": 34.7406, "longitude": 10.7603 }
+    },
+    {
+      "uid": "ride-002-full",
+      "pickUp": "Sousse, Boulevard 14 Janvier",
+      "destination": "Monastir, Zone Touristique",
+      "pickupState": "Sousse",
+      "destinationState": "Monastir",
+      "phone": "+21620000002",
+      "price": 8.5,
+      "remainingPassengers": 0,
+      "requestedPassengers": 3,
+      "baggageCapacity": 1,
+      "rideTime": "2030-01-10T17:30:00.000Z",
+      "rideStatus": "pending",
+      "source": "app",
+      "car": {
+        "uid": "car-002",
+        "brand": "Peugeot",
+        "model": "208",
+        "color": "Black",
+        "carNo": "987-TN-6543",
+        "possibleSeats": 3,
+        "airConditioner": false,
+        "status": "available",
+        "seats": []
+      },
+      "driver": {
+        "uid": "user-driver-2",
+        "displayName": "Sarra Driver",
+        "email": "sarra.driver@example.com",
+        "phone": "+21620000002",
+        "isDriver": true,
+        "cars": []
+      },
+      "passengers": [
+        {
+          "uid": "user-passenger-1",
+          "displayName": "Youssef Passenger",
+          "email": "youssef.passenger@example.com",
+          "phone": "+21620000003",
+          "isDriver": false,
+          "cars": []
+        },
+        {
+          "uid": "user-passenger-2",
+          "displayName": "Nour Passenger",
+          "email": "nour.passenger@example.com",
+          "phone": "+21620000004",
+          "isDriver": false,
+          "cars": []
+        },
+        {
+          "uid": "user-passenger-3",
+          "displayName": "Anonymous Passenger",
+          "email": "",
+          "phone": "+21620000005",
+          "isDriver": false,
+          "cars": []
+        }
+      ],
+      "pickupGeoPoint": { "latitude": 35.8256, "longitude": 10.6084 },
+      "destinationGeoPoint": { "latitude": 35.7643, "longitude": 10.8113 }
+    },
+    {
+      "uid": "ride-003-collecting-locked",
+      "pickUp": "Nabeul, Centre Ville",
+      "destination": "Hammamet, Yasmine",
+      "pickupState": "Nabeul",
+      "destinationState": "Hammamet",
+      "phone": "+21620000006",
+      "price": 5.0,
+      "remainingPassengers": 1,
+      "requestedPassengers": 3,
+      "baggageCapacity": 0,
+      "rideTime": "2030-02-01T09:00:00.000Z",
+      "rideStatus": "collecting",
+      "source": "app",
+      "car": {
+        "uid": "car-003",
+        "brand": "Renault",
+        "model": "Clio",
+        "color": "Yellow",
+        "carNo": "555-TN-1212",
+        "possibleSeats": 4,
+        "airConditioner": true,
+        "status": "reserved",
+        "seats": []
+      },
+      "driver": {
+        "uid": "user-driver-3",
+        "displayName": "Khalil Driver",
+        "email": "khalil.driver@example.com",
+        "phone": "+21620000006",
+        "isDriver": true,
+        "cars": []
+      },
+      "passengers": [
+        {
+          "uid": "user-passenger-2",
+          "displayName": "Nour Passenger",
+          "email": "nour.passenger@example.com",
+          "phone": "+21620000004",
+          "isDriver": false,
+          "cars": []
+        },
+        {
+          "uid": "user-passenger-4",
+          "displayName": "Mehdi Passenger",
+          "email": "mehdi.passenger@example.com",
+          "phone": "+21620000007",
+          "isDriver": false,
+          "cars": []
+        },
+        {
+          "uid": "user-passenger-5",
+          "displayName": "Ines Passenger",
+          "email": "ines.passenger@example.com",
+          "phone": "+21620000008",
+          "isDriver": false,
+          "cars": []
+        }
+      ],
+      "pickupGeoPoint": { "latitude": 36.4561, "longitude": 10.7376 },
+      "destinationGeoPoint": { "latitude": 36.4, "longitude": 10.6167 }
+    },
+    {
+      "uid": "ride-004-external-facebook",
+      "pickUp": "Bizerte, Port",
+      "destination": "Tunis, Aeroport",
+      "pickupState": "Bizerte",
+      "destinationState": "Tunis",
+      "phone": "+21620000009",
+      "price": 15.0,
+      "remainingPassengers": 2,
+      "requestedPassengers": 0,
+      "baggageCapacity": 1,
+      "rideTime": "2030-01-20T06:00:00.000Z",
+      "rideStatus": "pending",
+      "source": "facebook",
+      "car": {
+        "uid": "car-external-1",
+        "brand": "Unknown",
+        "model": "Unknown",
+        "color": "Unknown",
+        "carNo": "",
+        "possibleSeats": 2,
+        "airConditioner": false,
+        "status": "available",
+        "seats": []
+      },
+      "driver": {
+        "uid": "external-driver-1",
+        "displayName": "External Driver",
+        "email": "",
+        "phone": "+21620000009",
+        "isDriver": true,
+        "cars": []
+      },
+      "passengers": [],
+      "pickupGeoPoint": { "latitude": 37.2744, "longitude": 9.8739 },
+      "destinationGeoPoint": { "latitude": 36.8510, "longitude": 10.2272 }
+    },
+    {
+      "uid": "ride-005-past",
+      "pickUp": "Gabes, Centre",
+      "destination": "Medenine, Sud",
+      "pickupState": "Gabes",
+      "destinationState": "Medenine",
+      "phone": "+21620000010",
+      "price": 12.0,
+      "remainingPassengers": 4,
+      "requestedPassengers": 0,
+      "baggageCapacity": 0,
+      "rideTime": "2020-01-01T10:00:00.000Z",
+      "rideStatus": "completed",
+      "source": "app",
+      "car": {
+        "uid": "car-004",
+        "brand": "Kia",
+        "model": "Picanto",
+        "color": "Red",
+        "carNo": "111-TN-2222",
+        "possibleSeats": 4,
+        "airConditioner": false,
+        "status": "available",
+        "seats": []
+      },
+      "driver": {
+        "uid": "user-driver-4",
+        "displayName": "Fares Driver",
+        "email": "fares.driver@example.com",
+        "phone": "+21620000010",
+        "isDriver": true,
+        "cars": []
+      },
+      "passengers": [],
+      "pickupGeoPoint": { "latitude": 33.8815, "longitude": 10.0982 },
+      "destinationGeoPoint": { "latitude": 33.3549, "longitude": 10.5055 }
+    },
+    {
+      "uid": "ride-006-invalid-negative-seats",
+      "pickUp": "Kairouan, Medina",
+      "destination": "Sousse, Gare",
+      "pickupState": "Kairouan",
+      "destinationState": "Sousse",
+      "phone": "+21620000011",
+      "price": 6.0,
+      "remainingPassengers": -1,
+      "requestedPassengers": 2,
+      "baggageCapacity": 0,
+      "rideTime": "2030-03-01T07:00:00.000Z",
+      "rideStatus": "pending",
+      "source": "app",
+      "car": {
+        "uid": "car-005",
+        "brand": "Fiat",
+        "model": "Tipo",
+        "color": "Blue",
+        "carNo": "333-TN-4444",
+        "possibleSeats": 4,
+        "airConditioner": true,
+        "status": "available",
+        "seats": []
+      },
+      "driver": {
+        "uid": "user-driver-5",
+        "displayName": "Data Corruption Test Driver",
+        "email": "corrupt.driver@example.com",
+        "phone": "+21620000011",
+        "isDriver": true,
+        "cars": []
+      },
+      "passengers": [],
+      "pickupGeoPoint": { "latitude": 35.6781, "longitude": 10.0963 },
+      "destinationGeoPoint": { "latitude": 35.8256, "longitude": 10.6084 }
+    }
+  ],
+  "groups": [
+    {
+      "id": "group-001",
+      "name": "Tunis vers Sfax 15-01",
+      "chats": [
+        {
+          "uid": "msg-001",
+          "senderId": "user-driver-1",
+          "message": "Salut, je pars a 8h pile devant la station Total.",
+          "time": "2030-01-14T18:00:00.000Z"
+        },
+        {
+          "uid": "msg-002",
+          "senderId": "user-passenger-1",
+          "message": "Parfait, j'y serai. Merci !",
+          "time": "2030-01-14T18:05:00.000Z"
+        },
+        {
+          "uid": "msg-003",
+          "senderId": "user-driver-1",
+          "message": "Un peu de retard a cause du trafic, 10 minutes max.",
+          "time": "2030-01-15T07:55:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "group-002",
+      "name": "Sousse vers Monastir 10-01",
+      "chats": []
+    }
+  ]
+}
