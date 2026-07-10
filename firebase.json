@@ -1,7 +1,11 @@
 {
   "hosting": {
     "public": "dashboard",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
     "rewrites": [
       {
         "source": "**",
@@ -12,7 +16,10 @@
       {
         "source": "**/*.@(js|css)",
         "headers": [
-          { "key": "Cache-Control", "value": "public, max-age=300" }
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=300"
+          }
         ]
       }
     ]

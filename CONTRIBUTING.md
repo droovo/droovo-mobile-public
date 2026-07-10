@@ -73,7 +73,9 @@ build status, and release downloads — useful for checking whether your PR
 has been picked up or whether a build is green before asking. It's a
 static site under `dashboard/` that just calls the public GitHub API; it
 redeploys automatically on push to `main` via
-[`.github/workflows/deploy-dashboard.yml`](.github/workflows/deploy-dashboard.yml).
+[`firebase-hosting-merge.yml`](.github/workflows/firebase-hosting-merge.yml),
+and your own PRs get a live preview URL via
+[`firebase-hosting-pull-request.yml`](.github/workflows/firebase-hosting-pull-request.yml).
 You're welcome to improve it too (it's plain HTML/CSS/JS, no build step).
 
 ## Merging into the private app

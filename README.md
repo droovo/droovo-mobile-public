@@ -50,10 +50,12 @@ The full app, including sensitive business logic, payment, and backend integrati
 * **Downloads** — tagged releases with the APK/AAB/web build attached, which download directly with **no GitHub login needed**.
 
 It's hosted on Firebase Hosting and redeploys automatically via
-[`.github/workflows/deploy-dashboard.yml`](.github/workflows/deploy-dashboard.yml)
-whenever `dashboard/` changes on `main`. It ships no backend and stores no
-data of its own — everything shown is fetched live from
-`api.github.com` in the visitor's browser.
+[`.github/workflows/firebase-hosting-merge.yml`](.github/workflows/firebase-hosting-merge.yml)
+on every push to `main`; pull requests also get their own live preview
+URL via [`firebase-hosting-pull-request.yml`](.github/workflows/firebase-hosting-pull-request.yml)
+(posted as a PR comment). It ships no backend and stores no data of its
+own — everything shown is fetched live from `api.github.com` in the
+visitor's browser.
 
 ---
 
