@@ -81,6 +81,16 @@ function setListHtml(id, html) {
   document.getElementById(id).innerHTML = html;
 }
 
+// Sets a stat card's value and clears its loading shimmer. Without the
+// classList.remove, the value stays invisible: .skeleton forces
+// `color: transparent` and plain text (or a plain <a>, which inherits
+// color) has nothing else to override it with.
+function setStatValue(cardId, html) {
+  const el = document.getElementById(cardId).querySelector(".stat-value");
+  el.innerHTML = html;
+  el.classList.remove("skeleton");
+}
+
 function showError(message) {
   const banner = document.getElementById("error-banner");
   banner.textContent = message;
@@ -178,8 +188,10 @@ async function loadPulls() {
     `${API}/pulls?state=all&sort=updated&direction=desc&per_page=20`
   );
 
-  document.getElementById("stat-pulls").querySelector(".stat-value").textContent =
-    pulls.filter((p) => p.state === "open").length;
+  setStatValue(
+    "stat-pulls",
+    String(pulls.filter((p) => p.state === "open").length)
+  );
 
   setListHtml(
     "list-pulls",
@@ -211,8 +223,7 @@ async function loadPulls() {
 async function loadBranches() {
   const branches = await cachedFetch(`${API}/branches?per_page=50`);
 
-  document.getElementById("stat-branches").querySelector(".stat-value").textContent =
-    branches.length;
+  setStatValue("stat-branches", String(branches.length));
 
   setListHtml(
     "list-branches",
@@ -249,10 +260,12 @@ async function loadBuilds() {
   if (runs.length > 0) {
     const latest = runs[0];
     const status = runStatusBadge(latest);
-    document.getElementById("stat-build").querySelector(".stat-value").innerHTML =
-      `<a href="${latest.html_url}" target="_blank" rel="noopener"><span class="badge ${status.cls}">${status.text}</span></a>`;
+    setStatValue(
+      "stat-build",
+      `<a href="${latest.html_url}" target="_blank" rel="noopener"><span class="badge ${status.cls}">${status.text}</span></a>`
+    );
   } else {
-    document.getElementById("stat-build").querySelector(".stat-value").textContent = "—";
+    setStatValue("stat-build", "—");
   }
 
   setListHtml(
@@ -289,11 +302,12 @@ async function loadDownloads() {
 
   if (releases.length > 0) {
     const latest = releases[0];
-    document.getElementById("stat-release").querySelector(".stat-value").innerHTML =
-      `<a href="${latest.html_url}" target="_blank" rel="noopener">${escapeHtml(latest.tag_name)}</a>`;
+    setStatValue(
+      "stat-release",
+      `<a href="${latest.html_url}" target="_blank" rel="noopener">${escapeHtml(latest.tag_name)}</a>`
+    );
   } else {
-    document.getElementById("stat-release").querySelector(".stat-value").textContent =
-      "none yet";
+    setStatValue("stat-release", "none yet");
   }
 
   setListHtml(
