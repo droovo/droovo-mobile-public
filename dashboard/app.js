@@ -8,32 +8,6 @@ const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes — keeps us comfortably under
 // GitHub's unauthenticated rate limit (60 requests/hour per IP) across
 // repeat visits/refreshes.
 
-// --- optional analytics (page views only, no PII) ---------------------
-// Fire-and-forget: runs in the background and never blocks (or breaks)
-// the actual dashboard data below, even if the CDN import fails.
-(async () => {
-  try {
-    const { initializeApp } = await import(
-      "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js"
-    );
-    const { getAnalytics } = await import(
-      "https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js"
-    );
-    const firebaseConfig = {
-      apiKey: "AIzaSyBpj24aftZgGh0HZeCUHSOu4ZyzY0R5PPc",
-      authDomain: "droovo-flutter-public.firebaseapp.com",
-      projectId: "droovo-flutter-public",
-      storageBucket: "droovo-flutter-public.firebasestorage.app",
-      messagingSenderId: "44004609694",
-      appId: "1:44004609694:web:4cc505f3fe10f5e030f58f",
-      measurementId: "G-RRBJLK95Y7",
-    };
-    getAnalytics(initializeApp(firebaseConfig));
-  } catch (_) {
-    // Analytics is a nice-to-have; never let it block the dashboard itself.
-  }
-})();
-
 // --- fetch helper with localStorage caching ----------------------------
 
 async function cachedFetch(url) {
