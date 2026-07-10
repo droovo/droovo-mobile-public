@@ -67,7 +67,7 @@ you don't need to create a tag yourself as a contributor.
 
 ## Project dashboard
 
-**[droovo-flutter-public.web.app](https://droovo-flutter-public.web.app)**
+**[public.droovo.tn](https://public.droovo.tn/)**
 is a live, read-only view of this repo — activity, open PRs, branches, CI
 build status, and release downloads — useful for checking whether your PR
 has been picked up or whether a build is green before asking. It's a

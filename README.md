@@ -4,7 +4,7 @@
 
 Welcome to the **public Droovo Flutter app repository**! This repo contains only a subset of the Flutter app: helper classes and testable code that external contributors can work on and improve.
 
-📊 **[Live project dashboard](https://droovo-flutter-public.web.app)** — branches, recent activity, pull requests, CI builds, and downloads at a glance.
+📊 **[Live project dashboard](https://public.droovo.tn/)** — branches, recent activity, pull requests, CI builds, and downloads at a glance.
 
 🌐 [droovo.tn](https://droovo.tn/) • 📱 [Get it on Google Play](https://play.google.com/store/apps/details?id=tn.droovo.droovo_app) • ✉️ [Contact us](https://droovo.tn/contact)
 
@@ -41,7 +41,7 @@ The full app, including sensitive business logic, payment, and backend integrati
 
 ## Dashboard
 
-**[droovo-flutter-public.web.app](https://droovo-flutter-public.web.app)** is a live, read-only project dashboard — a plain static site (`dashboard/`) that reads public data straight from the GitHub API and shows:
+**[public.droovo.tn](https://public.droovo.tn/)** is a live, read-only project dashboard — a plain static site (`dashboard/`) that reads public data straight from the GitHub API and shows:
 
 * **Activity** — recent commits on `main`, so you can see what changed and who changed it.
 * **Pull Requests** — open and recently updated PRs from contributors.
