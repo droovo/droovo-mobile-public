@@ -4,6 +4,8 @@
 
 Welcome to the **public Droovo Flutter app repository**! This repo contains only a subset of the Flutter app: helper classes and testable code that external contributors can work on and improve.
 
+🌐 [droovo.tn](https://droovo.tn/) • 📱 [Get it on Google Play](https://play.google.com/store/apps/details?id=tn.droovo.droovo_app) • ✉️ [Contact us](https://droovo.tn/contact)
+
 > ⚠️ **Note:** Sensitive code and the full app are maintained in the private Droovo GitLab repository.
 
 ---
@@ -127,8 +129,9 @@ This workflow ensures contributors can safely improve shared code without exposi
 
 ## Reporting Issues
 
-* Submit an issue if you find bugs or have improvement suggestions.
+* Submit an issue if you find bugs or have improvement suggestions in this repo's helper logic.
 * Provide a detailed description, steps to reproduce, and screenshots if possible.
+* For anything about the live app itself (account/billing/ride issues), use [droovo.tn/contact](https://droovo.tn/contact) instead — this repo's maintainers can't act on those from a GitHub issue.
 
 ---
 
